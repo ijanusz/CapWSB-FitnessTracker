@@ -7,3 +7,10 @@ spring:
   h2:
     console:
       enabled: true
+
+  profiles:
+    active: loadInitialData
+
+# run on port 8081
+#server:
+#  port: 8081
