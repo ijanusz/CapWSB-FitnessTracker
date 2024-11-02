@@ -27,7 +27,26 @@ class UserMapper {
     SearchUserDto toSearchUserDto(User user) {
         return new SearchUserDto(
                 user.getId(),
-                user.getEmail()
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getBirthdate()
         );
+    }
+
+    User toUpdateEntity(User existingUser, UserDto userDto) {
+        if (userDto.firstName() != null) {
+            existingUser.setFirstName(userDto.firstName());
+        }
+        if (userDto.lastName() != null) {
+            existingUser.setLastName(userDto.lastName());
+        }
+        if (userDto.birthdate() != null) {
+            existingUser.setBirthdate(userDto.birthdate());
+        }
+        if (userDto.email() != null) {
+            existingUser.setEmail(userDto.email());
+        }
+        return existingUser;
     }
 }

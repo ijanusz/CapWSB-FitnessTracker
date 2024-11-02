@@ -8,4 +8,6 @@ public interface UserService {
 
     User createUser(User user);
     void removeUser(Long userId);
+
+    User updateUser(User entity);
 }

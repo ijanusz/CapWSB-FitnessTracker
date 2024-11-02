@@ -55,7 +55,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         User user1 = existingUser(generateUser());
         User user2 = existingUser(generateUser());
 
-        mockMvc.perform(get("/v1/users/simple").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/simple-users").contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
@@ -87,7 +87,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnDetailsAboutUser_whenGettingUserByEmail() throws Exception {
         User user1 = existingUser(generateUser());
 
-        mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/find").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -100,15 +100,13 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         User user1 = existingUser(generateUserWithDate(LocalDate.of(2000, 8, 11)));
         User user2 = existingUser(generateUserWithDate(LocalDate.of(2024, 8, 11)));
 
-
-        mockMvc.perform(get("/v1/users/older/{time}", LocalDate.of(2024, 8, 10)).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/find").param("age", String.valueOf(1)).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
                 .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
                 .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
-
                 .andExpect(jsonPath("$[1]").doesNotExist());
     }
 
@@ -175,8 +173,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         String USER_BIRTHDATE = "1999-09-29";
         String USER_EMAIL = "mike.scott@domain.com";
 
-        String updateRequest = """
-                                              
+        String updateRequest = """                 
                 {
                 "firstName": "%s",
                 "lastName": "%s",

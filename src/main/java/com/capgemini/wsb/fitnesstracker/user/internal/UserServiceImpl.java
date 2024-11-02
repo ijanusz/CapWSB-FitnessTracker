@@ -45,4 +45,13 @@ class UserServiceImpl implements UserService, UserProvider {
     public void removeUser(final Long userId) {
         userRepository.deleteById(userId);
     }
+
+    @Override
+    public User updateUser(User user) {
+        log.info("Updating User {}", user);
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("Cannot update user without ID");
+        }
+        return userRepository.save(user);
+    }
 }

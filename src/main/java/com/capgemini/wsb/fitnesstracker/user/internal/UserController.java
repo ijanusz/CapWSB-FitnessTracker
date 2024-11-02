@@ -4,15 +4,14 @@ import com.capgemini.wsb.fitnesstracker.user.api.SearchUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.SimpleUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
-import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.CompositeUserFilterStrategy;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.OlderThanAgeStrategy;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.SearchEmailStrategy;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.UserFilterStrategy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 @RestController
@@ -48,6 +47,7 @@ class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
         System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
 
@@ -55,6 +55,7 @@ class UserController {
     }
 
     @DeleteMapping("/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public long removeUser(@PathVariable("userId") Long userId) {
         userService.removeUser(userId);
         return userId;
@@ -79,10 +80,12 @@ class UserController {
                 .toList();
     }
 
-    @PutMapping
-    public User updateUser(@RequestBody UserDto userDto) {
-
-        ''
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        return userService.getUser(userId)
+                .map(existingUser -> userMapper.toUpdateEntity(existingUser, userDto))
+                .map(userService::updateUser)
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     private Stream<UserFilterStrategy> applyStrategies(List<UserFilterStrategy> strategies, User user) {
