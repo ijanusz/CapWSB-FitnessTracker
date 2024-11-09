@@ -17,6 +17,9 @@ public class TrainingController {
 
     @GetMapping
     public List<TrainingDto> getAllTrainings() {
-        return trainingService.findAllTrainings().stream().map(trainingMapper::toDto).toList();
+        return trainingService.findAllTrainings()
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
     }
 }
