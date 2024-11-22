@@ -31,7 +31,7 @@ class UserController {
                 .toList();
     }
 
-    @GetMapping("/simple-users")
+    @GetMapping("/simple")
     public List<SimpleUserDto> getSimpleUsers() {
         return userService.findAllUsers()
                 .stream()

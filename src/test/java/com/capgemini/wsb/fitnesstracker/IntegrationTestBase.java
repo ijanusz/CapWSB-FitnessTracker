@@ -4,10 +4,14 @@ import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.List;
 
@@ -58,5 +62,12 @@ public abstract class IntegrationTestBase {
         return trainingRepository.findAll();
     }
 
+    @Configuration
+    static class TestConfig {
+        @Bean
+        public JavaMailSender javaMailSender() {
+            return Mockito.mock(JavaMailSender.class);
+        }
+    }
 
 }

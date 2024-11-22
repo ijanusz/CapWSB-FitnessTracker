@@ -39,7 +39,7 @@ class MonthlyTrainingReportSchedulerTest extends IntegrationTestBase {
         User user1 = createUser("John", "Doe", "john.doe@example.com", LocalDate.of(1990, 1, 1));
         User user2 = createUser("Jane", "Smith", "jane.smith@example.com", LocalDate.of(1992, 2, 2));
 
-        Training training1 = createAndPersistTraining(user1, ActivityType.RUNNING, 5.0, 10.0);
+        createAndPersistTraining(user1, ActivityType.RUNNING, 5.0, 10.0);
 
         scheduler.sendMonthlyTrainingReports();
 
