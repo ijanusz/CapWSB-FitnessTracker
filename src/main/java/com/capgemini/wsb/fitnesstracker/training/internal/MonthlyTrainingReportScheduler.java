@@ -23,7 +23,7 @@ public class MonthlyTrainingReportScheduler {
     private final UserProvider userProvider;
     private final EmailSender emailSender;
 
-    @Scheduled(cron = "0 0 0 1 * ?")
+    @Scheduled(cron = "@monthly")
     public void sendMonthlyTrainingReports() {
         LocalDate now = LocalDate.now();
         LocalDate firstDayOfCurrentMonth = now.withDayOfMonth(1);
