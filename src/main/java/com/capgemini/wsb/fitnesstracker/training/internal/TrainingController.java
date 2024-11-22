@@ -72,8 +72,8 @@ public class TrainingController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TrainingDto addTraining(@RequestBody @Valid CreateTrainingRequestDto createTrainingRequestDto) {
-        User user = userProvider.getUser(createTrainingRequestDto.userId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + createTrainingRequestDto.userId()));
+        User user = userProvider.getUser(createTrainingRequestDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + createTrainingRequestDto.getUserId()));
 
         Training training = trainingMapper.toEntity(createTrainingRequestDto, user);
         Training createdTraining = trainingService.createTraining(training);
@@ -85,8 +85,8 @@ public class TrainingController {
         Training existingTraining = trainingService.getTraining(trainingId)
                 .orElseThrow(() -> new TrainingNotFoundException(trainingId));
 
-        User user = userProvider.getUser(updateRequestDto.userId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + updateRequestDto.userId()));
+        User user = userProvider.getUser(updateRequestDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + updateRequestDto.getUserId()));
 
         Training updatedTraining = trainingMapper.updateEntity(existingTraining, updateRequestDto, user);
         Training savedTraining = trainingService.updateTraining(updatedTraining);

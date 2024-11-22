@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrainingMapper {
 
-    public Training toEntity(CreateTrainingRequestDto dto, User user) {
+    public Training toEntity(CreateTrainingRequestDto createTrainingRequestDto, User user) {
         return new Training(
                 user,
-                dto.startTime(),
-                dto.endTime(),
-                ActivityType.valueOf(dto.activityType().toUpperCase()),
-                dto.distance(),
-                dto.averageSpeed()
+                createTrainingRequestDto.getStartTime(),
+                createTrainingRequestDto.getEndTime(),
+                ActivityType.valueOf(createTrainingRequestDto.getActivityType().toUpperCase()),
+                createTrainingRequestDto.getDistance(),
+                createTrainingRequestDto.getAverageSpeed()
         );
     }
 
@@ -26,11 +26,11 @@ public class TrainingMapper {
 
     public Training updateEntity(Training existingTraining, CreateTrainingRequestDto updateRequestDto, User user) {
         existingTraining.setUser(user);
-        existingTraining.setStartTime(updateRequestDto.startTime());
-        existingTraining.setEndTime(updateRequestDto.endTime());
-        existingTraining.setActivityType(ActivityType.valueOf(updateRequestDto.activityType().toUpperCase()));
-        existingTraining.setDistance(updateRequestDto.distance());
-        existingTraining.setAverageSpeed(updateRequestDto.averageSpeed());
+        existingTraining.setStartTime(updateRequestDto.getStartTime());
+        existingTraining.setEndTime(updateRequestDto.getEndTime());
+        existingTraining.setActivityType(ActivityType.valueOf(updateRequestDto.getActivityType().toUpperCase()));
+        existingTraining.setDistance(updateRequestDto.getDistance());
+        existingTraining.setAverageSpeed(updateRequestDto.getAverageSpeed());
         return existingTraining;
     }
 

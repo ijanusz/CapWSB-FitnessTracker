@@ -1,9 +1,8 @@
-package com.capgemini.wsb.fitnesstracker.training;
+package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.IntegrationTest;
 import com.capgemini.wsb.fitnesstracker.IntegrationTestBase;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,45 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private static User generateClient() {
+        return new User(randomUUID().toString(), randomUUID().toString(), now(), randomUUID().toString());
+    }
+
+    private static Training generateTraining(User user) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return new Training(
+                user,
+                sdf.parse("2024-01-19 08:00:00"),
+                sdf.parse("2024-01-19 09:30:00"),
+                ActivityType.RUNNING,
+                10.5,
+                8.2);
+    }
+
+    private static Training generateTrainingWithActivityType(User user, ActivityType activityType) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return new Training(
+                user,
+                sdf.parse("2024-01-19 08:00:00"),
+                sdf.parse("2024-01-19 09:30:00"),
+                activityType,
+                0, 0);
+    }
+
+    private static Training generateTrainingWithDetails(User user, String startTime, String endTime, ActivityType activityType, double distance, double averageSpeed) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return new Training(
+                user,
+                sdf.parse(startTime),
+                sdf.parse(endTime),
+                activityType,
+                distance,
+                averageSpeed);
+    }
 
     @Test
     void shouldReturnAllTrainings_whenGettingAllTrainings() throws Exception {
@@ -75,7 +113,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$[0].distance").value((training1.getDistance())))
                 .andExpect(jsonPath("$[0].averageSpeed").value(training1.getAverageSpeed()))
 
-                .andExpect(jsonPath("$[1]").doesNotExist());;
+                .andExpect(jsonPath("$[1]").doesNotExist());
     }
 
     @Test
@@ -180,45 +218,6 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.activityType").value(ActivityType.TENNIS.toString()))
                 .andExpect(jsonPath("$.distance").value(0.0))
                 .andExpect(jsonPath("$.averageSpeed").value(0.0));
-    }
-
-    private static User generateClient() {
-        return new User(randomUUID().toString(), randomUUID().toString(), now(), randomUUID().toString());
-    }
-
-    private static Training generateTraining(User user) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return new Training(
-                user,
-                sdf.parse("2024-01-19 08:00:00"),
-                sdf.parse("2024-01-19 09:30:00"),
-                ActivityType.RUNNING,
-                10.5,
-                8.2);
-    }
-
-    private static Training generateTrainingWithActivityType(User user, ActivityType activityType) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return new Training(
-                user,
-                sdf.parse("2024-01-19 08:00:00"),
-                sdf.parse("2024-01-19 09:30:00"),
-                activityType,
-                0, 0);
-    }
-
-    private static Training generateTrainingWithDetails(User user, String startTime, String endTime, ActivityType activityType, double distance, double averageSpeed) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return new Training(
-                user,
-                sdf.parse(startTime),
-                sdf.parse(endTime),
-                activityType,
-                distance,
-                averageSpeed);
     }
 
 
