@@ -39,4 +39,14 @@ public interface TrainingProvider {
      * @return A {@link List} containing all trainings of the specified activity type
      */
     List<Training> findTrainingsByActivityType(ActivityType activityType);
+
+    /**
+     * Finds trainings for a user within a specific date range.
+     *
+     * @param userId    ID of the user
+     * @param startDate Start date
+     * @param endDate   End date
+     * @return List of trainings
+     */
+    List<Training> findTrainingsByUserIdAndDateRange(Long userId, Date startDate, Date endDate);
 }

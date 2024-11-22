@@ -63,4 +63,10 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     public List<Training> findTrainingsByActivityType(ActivityType activityType) {
         return trainingRepository.findByActivityType(activityType);
     }
+
+
+    @Override
+    public List<Training> findTrainingsByUserIdAndDateRange(Long userId, Date startDate, Date endDate) {
+        return trainingRepository.findByUserIdAndStartTimeBetween(userId, startDate, endDate);
+    }
 }

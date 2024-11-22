@@ -2,7 +2,6 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -35,4 +34,14 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
      * @return A {@link List} of trainings matching the specified activity type
      */
     List<Training> findByActivityType(ActivityType activityType);
+
+    /**
+     * Finds trainings by user ID within a specified date range.
+     *
+     * @param userId    ID of the user
+     * @param startTime Start date of the range
+     * @param endTime   End date of the range
+     * @return List of trainings
+     */
+    List<Training> findByUserIdAndStartTimeBetween(Long userId, Date startTime, Date endTime);
 }
