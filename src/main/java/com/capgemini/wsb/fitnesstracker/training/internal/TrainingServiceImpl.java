@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,22 +25,42 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
 
     @Override
     public Optional<Training> getTraining(final Long trainingId) {
-        throw new UnsupportedOperationException("Not finished yet");
+        return trainingRepository.findById(trainingId);
     }
 
 
     @Override
     public Training createTraining(Training training) {
-        return null;
+        return trainingRepository.save(training);
     }
 
     @Override
     public void removeTraining(Long trainingId) {
-
+        trainingRepository.deleteById(trainingId);
     }
+
 
     @Override
     public Training updateTraining(Training training) {
-        return null;
+        log.info("Updating Training {}", training);
+        if (training.getId() == null) {
+            throw new IllegalArgumentException("Cannot update training without ID");
+        }
+        return trainingRepository.save(training);
+    }
+
+    @Override
+    public List<Training> findFinishedTrainingsAfterTime(Date afterTime) {
+        return trainingRepository.findByEndTimeAfter(afterTime);
+    }
+
+    public Optional<List<Training>> getUserTraining(Long userId) {
+        List<Training> trainings = trainingRepository.findByUserId(userId);
+        return trainings.isEmpty() ? Optional.empty() : Optional.of(trainings);
+    }
+
+    @Override
+    public List<Training> findTrainingsByActivityType(ActivityType activityType) {
+        return trainingRepository.findByActivityType(activityType);
     }
 }
