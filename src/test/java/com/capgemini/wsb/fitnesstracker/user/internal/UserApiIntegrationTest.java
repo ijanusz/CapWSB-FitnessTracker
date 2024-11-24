@@ -34,6 +34,10 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         return new User(randomUUID().toString(), randomUUID().toString(), LocalDate.now(), randomUUID().toString());
     }
 
+    public static User generateUserWithDetails(String email, LocalDate birthdate) {
+        return new User(randomUUID().toString(), randomUUID().toString(), birthdate, email);
+    }
+
     private static User generateUserWithDate(LocalDate date) {
         return new User(randomUUID().toString(), randomUUID().toString(), date, randomUUID().toString());
     }
@@ -95,7 +99,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnDetailsAboutUser_whenGettingUserByEmail() throws Exception {
         User user1 = existingUser(generateUser());
 
-        mockMvc.perform(get("/v1/users/find").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -108,12 +112,50 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         User user1 = existingUser(generateUserWithDate(LocalDate.of(2000, 8, 11)));
         User user2 = existingUser(generateUserWithDate(LocalDate.of(2024, 8, 11)));
 
-        mockMvc.perform(get("/v1/users/find").param("age", String.valueOf(1)).contentType(MediaType.APPLICATION_JSON))
+
+        mockMvc.perform(get("/v1/users/older/{time}", LocalDate.of(2024, 8, 10)).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
                 .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
+                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
+                .andExpect(jsonPath("$[1]").doesNotExist());
+    }
+
+    @Test
+    void shouldReturnFilteredUsers_whenFindingUsersByParams() throws Exception {
+        User user1 = existingUser(generateUserWithDetails("john.doe@example.com", LocalDate.of(1990, 1, 1)));
+        User user2 = existingUser(generateUserWithDetails("jane.doe@example.com", LocalDate.of(2000, 1, 1)));
+
+        mockMvc.perform(get("/v1/users/find")
+                        .param("age", "30")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()))
+                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
+                .andExpect(jsonPath("$[1]").doesNotExist());
+
+        mockMvc.perform(get("/v1/users/find")
+                        .param("email", "jane.doe@example.com")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].email").value(user2.getEmail()))
+                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user2.getBirthdate())))
+                .andExpect(jsonPath("$[1]").doesNotExist());
+
+        mockMvc.perform(get("/v1/users/find")
+                        .param("email", "john.doe@example.com")
+                        .param("age", "30")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()))
                 .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
                 .andExpect(jsonPath("$[1]").doesNotExist());
     }
