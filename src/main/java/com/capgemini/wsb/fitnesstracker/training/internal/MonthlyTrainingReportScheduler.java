@@ -1,11 +1,11 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.mail.api.EmailDto;
 import com.capgemini.wsb.fitnesstracker.mail.api.EmailSender;
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.mail.api.dto.EmailDto;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.training.api.model.Training;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

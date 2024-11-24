@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
+
 import java.util.List;
 import java.util.Optional;
 

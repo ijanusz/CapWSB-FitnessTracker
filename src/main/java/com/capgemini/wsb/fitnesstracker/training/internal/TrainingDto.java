@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
+import com.capgemini.wsb.fitnesstracker.user.api.dto.UserDto;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Value;

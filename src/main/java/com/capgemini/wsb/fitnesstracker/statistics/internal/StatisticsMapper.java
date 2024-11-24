@@ -1,7 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
-import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import org.springframework.stereotype.Component;
 
 @Component

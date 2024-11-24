@@ -3,7 +3,7 @@ package com.capgemini.wsb.fitnesstracker.statistics.internal;
 import lombok.Data;
 
 @Data
-public class StatisticsDto {
+class StatisticsDto {
     Long id;
     Long userId;
     int totalTrainings;

@@ -1,6 +1,6 @@
-package com.capgemini.wsb.fitnesstracker.user.api;
+package com.capgemini.wsb.fitnesstracker.user.api.model;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.model.Training;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;

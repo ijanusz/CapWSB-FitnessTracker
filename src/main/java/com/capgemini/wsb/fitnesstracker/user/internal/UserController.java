@@ -1,10 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.SearchUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.SimpleUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.dto.SearchUserDto;
+import com.capgemini.wsb.fitnesstracker.user.api.dto.SimpleUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.exception.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.exception.UserWithMailNotFoundException;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.OlderThanAgeStrategy;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.SearchEmailStrategy;
 import com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy.UserFilterStrategy;

@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.user.api;
+package com.capgemini.wsb.fitnesstracker.user.api.dto;
 
 import jakarta.annotation.Nullable;
 

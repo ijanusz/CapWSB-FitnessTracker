@@ -1,7 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.mail.internal;
 
-import com.capgemini.wsb.fitnesstracker.mail.api.EmailDto;
 import com.capgemini.wsb.fitnesstracker.mail.api.EmailSender;
+import com.capgemini.wsb.fitnesstracker.mail.api.dto.EmailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

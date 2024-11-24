@@ -1,6 +1,6 @@
-package com.capgemini.wsb.fitnesstracker.statistics.api;
+package com.capgemini.wsb.fitnesstracker.statistics.api.model;
 
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;

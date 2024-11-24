@@ -1,8 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
-import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
 import com.capgemini.wsb.fitnesstracker.statistics.api.StatisticsProvider;
 import com.capgemini.wsb.fitnesstracker.statistics.api.StatisticsService;
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package com.capgemini.wsb.fitnesstracker;
 
-import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
+import com.capgemini.wsb.fitnesstracker.training.api.model.Training;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.mockito.Mockito;

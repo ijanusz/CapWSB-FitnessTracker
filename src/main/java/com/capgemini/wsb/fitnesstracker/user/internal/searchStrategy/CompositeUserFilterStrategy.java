@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy;
 
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 import lombok.AllArgsConstructor;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 
 import com.capgemini.wsb.fitnesstracker.user.api.exception.UserNotFoundException;
+import com.capgemini.wsb.fitnesstracker.user.api.model.User;
 
 /**
  * Interface (API) for modifying operations on {@link User} entities through the API.

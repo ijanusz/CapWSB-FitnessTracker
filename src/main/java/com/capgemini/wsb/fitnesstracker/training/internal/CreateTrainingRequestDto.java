@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.training.api;
+package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import lombok.Builder;
 import lombok.Value;

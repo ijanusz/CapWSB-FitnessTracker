@@ -1,6 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
-import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

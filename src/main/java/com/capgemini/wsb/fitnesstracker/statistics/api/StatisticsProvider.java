@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.statistics.api;
 
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
+
 import java.util.List;
 import java.util.Optional;
 

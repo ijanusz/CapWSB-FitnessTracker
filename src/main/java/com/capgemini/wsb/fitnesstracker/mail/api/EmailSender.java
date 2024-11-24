@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.mail.api;
 
+import com.capgemini.wsb.fitnesstracker.mail.api.dto.EmailDto;
+
 /**
  * API interface for component responsible for sending emails.
  */

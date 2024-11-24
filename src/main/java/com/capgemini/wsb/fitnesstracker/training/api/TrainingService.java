@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
+import com.capgemini.wsb.fitnesstracker.training.api.model.Training;
+
 /**
  * Service interface for managing training operations.
  * Provides methods to create, update, and remove training sessions.

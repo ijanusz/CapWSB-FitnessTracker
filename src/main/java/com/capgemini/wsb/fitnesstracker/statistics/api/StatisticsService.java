@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.statistics.api;
 
+import com.capgemini.wsb.fitnesstracker.statistics.api.model.Statistics;
+
 public interface StatisticsService {
 
     /**

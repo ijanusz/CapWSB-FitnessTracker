@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
+import com.capgemini.wsb.fitnesstracker.training.api.model.Training;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 
 import java.util.Date;
