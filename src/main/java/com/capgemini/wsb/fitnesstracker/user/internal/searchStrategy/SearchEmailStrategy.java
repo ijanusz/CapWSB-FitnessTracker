@@ -1,10 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.user.internal.searchStrategy;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
-public class SearchEmailStrategy implements UserFilterStrategy{
+@RequiredArgsConstructor
+public class SearchEmailStrategy implements UserFilterStrategy {
     private final String email;
 
     @Override

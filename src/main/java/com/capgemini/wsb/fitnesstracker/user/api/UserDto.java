@@ -11,13 +11,4 @@ public record UserDto(@Nullable Long id, String firstName, String lastName,
                       @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
                       String email) {
 
-    public static UserDto from(User user) {
-        return UserDto.builder()
-                .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .birthdate(user.getBirthdate())
-                .email(user.getEmail())
-                .build();
-    }
 }

@@ -4,12 +4,13 @@ import com.capgemini.wsb.fitnesstracker.training.api.CreateTrainingRequestDto;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TrainingMapper {
+class TrainingMapper {
 
-    public Training toEntity(CreateTrainingRequestDto createTrainingRequestDto, User user) {
+    Training toEntity(CreateTrainingRequestDto createTrainingRequestDto, User user) {
         return new Training(
                 user,
                 createTrainingRequestDto.getStartTime(),
@@ -20,11 +21,19 @@ public class TrainingMapper {
         );
     }
 
-    public TrainingDto toDto(Training training) {
-        return TrainingDto.from(training);
+    TrainingDto toDto(Training training) {
+        return TrainingDto.builder()
+                .id(training.getId())
+                .user(toDto(training.getUser()))
+                .startTime(training.getStartTime())
+                .endTime(training.getEndTime())
+                .activityType(training.getActivityType())
+                .distance(training.getDistance())
+                .averageSpeed(training.getAverageSpeed())
+                .build();
     }
 
-    public Training updateEntity(Training existingTraining, CreateTrainingRequestDto updateRequestDto, User user) {
+    Training updateEntity(Training existingTraining, CreateTrainingRequestDto updateRequestDto, User user) {
         existingTraining.setUser(user);
         existingTraining.setStartTime(updateRequestDto.getStartTime());
         existingTraining.setEndTime(updateRequestDto.getEndTime());
@@ -34,4 +43,11 @@ public class TrainingMapper {
         return existingTraining;
     }
 
+    private UserDto toDto(User user) {
+        return new UserDto(user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getBirthdate(),
+                user.getEmail());
+    }
 }

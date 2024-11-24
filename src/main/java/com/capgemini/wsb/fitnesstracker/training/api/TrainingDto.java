@@ -55,21 +55,4 @@ public class TrainingDto {
         this.averageSpeed = averageSpeed;
     }
 
-    /**
-     * Converts a Training entity into a TrainingDto.
-     *
-     * @param training the Training entity to convert
-     * @return a TrainingDto representing the given Training entity
-     */
-    public static TrainingDto from(Training training) {
-        return TrainingDto.builder()
-                .id(training.getId())
-                .user(UserDto.from(training.getUser()))
-                .startTime(training.getStartTime())
-                .endTime(training.getEndTime())
-                .activityType(training.getActivityType())
-                .distance(training.getDistance())
-                .averageSpeed(training.getAverageSpeed())
-                .build();
-    }
 }

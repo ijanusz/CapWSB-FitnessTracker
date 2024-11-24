@@ -35,7 +35,7 @@ class UserController {
     public List<SimpleUserDto> getSimpleUsers() {
         return userService.findAllUsers()
                 .stream()
-                .map(SimpleUserDto::from)
+                .map(userMapper::toSimpleDto)
                 .toList();
     }
 
@@ -48,7 +48,7 @@ class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public User addUser(@RequestBody UserDto userDto) {
         System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
 
         return userService.createUser(userMapper.toEntity(userDto));
